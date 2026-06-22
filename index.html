@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="om">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Baradhu - Afaan Ingilizii Baradhu</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="app-container">
+        
+        <!-- ================= WELCOME SCREEN ================= -->
+        <div id="language-screen" class="screen active">
+            <div class="animated-bg"></div>
+            <div class="screen-content">
+                <div class="welcome-animation">
+                    <div class="floating-emojis">
+                        <span class="emoji emoji-1">📚</span>
+                        <span class="emoji emoji-2">🎓</span>
+                        <span class="emoji emoji-3">✨</span>
+                        <span class="emoji emoji-4">🌟</span>
+                    </div>
+                    <h1 class="app-title" id="app-title">Baradhu</h1>
+                    <p class="app-subtitle">Afaan Ingilizii Baradhu</p>
+                    <div class="tagline">
+                        <i class="fas fa-rocket"></i>
+                        <span>Afaan Ingilizii salphaadhaan baradhu</span>
+                    </div>
+                </div>
+                
+                <div class="language-cards">
+                    <div class="lang-card" onclick="selectLanguage('english')">
+                        <div class="lang-card-bg"></div>
+                        <div class="lang-flag">🇬🇧</div>
+                        <h3>Afaan Ingilizii</h3>
+                        <p>Ingilizii haaraa baradhu</p>
+                        <div class="lang-features">
+                            <span><i class="fas fa-check"></i> Barnoota 12+</span>
+                            <span><i class="fas fa-check"></i> Jecha 1000+</span>
+                        </div>
+                        <div class="lang-btn">Jalqabi <i class="fas fa-arrow-right"></i></div>
+                    </div>
+                </div>
+                
+                <div class="features-preview">
+                    <div class="feature-pill"><i class="fas fa-gamepad"></i> Taphataa Fun</div>
+                    <div class="feature-pill"><i class="fas fa-trophy"></i> Badhaasota</div>
+                    <div class="feature-pill"><i class="fas fa-mobile-alt"></i> Offline</div>
+                    <div class="feature-pill"><i class="fas fa-users"></i> Hiriyoota</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= HOME SCREEN ================= -->
+        <div id="home-screen" class="screen">
+            <div class="home-bg-pattern"></div>
+            
+            <header class="modern-header">
+                <div class="header-left">
+                    <div class="user-avatar" id="user-avatar-display">👋</div>
+                    <div class="user-info">
+                        <span class="greeting" id="user-greeting">Akkam!</span>
+                        <span class="user-level" id="user-name-display">Barataa</span>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="xp-display">
+                        <i class="fas fa-star"></i>
+                        <span id="total-xp">0</span>
+                    </div>
+                    <button class="settings-btn" onclick="showUserMenu()">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                </div>
+            </header>
+            
+            <div class="progress-section">
+                <div class="progress-card">
+                    <div class="progress-info">
+                        <h3>Adeemsa Keenya</h3>
+                        <p id="progress-text">0 / 12 Barnoota</p>
+                    </div>
+                    <div class="progress-ring">
+                        <svg width="80" height="80">
+                            <circle class="progress-bg" cx="40" cy="40" r="36"></circle>
+                            <circle class="progress-fill" id="progress-ring-fill" cx="40" cy="40" r="36"></circle>
+                        </svg>
+                        <span class="progress-percent" id="progress-percent">0%</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="premium-banner-container"></div>
+            
+            <div class="lessons-section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-book-open"></i> Barnoota
+                    </h2>
+                    <button class="minimize-btn" id="minimize-btn" onclick="toggleLessonsView()">
+                        <i class="fas fa-compress"></i>
+                        <span>Xiqqeessi</span>
+                    </button>
+                </div>
+                <div class="lessons-grid" id="lessons-grid"></div>
+            </div>
+        </div>
+
+        <!-- ================= LEARN SCREEN ================= -->
+        <div id="learn-screen" class="screen">
+            <div class="learn-bg-pattern"></div>
+            
+            <header class="modern-header">
+                <button class="back-btn" onclick="showScreen('home-screen')">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <div class="lesson-progress">
+                    <div class="progress-dots" id="lesson-progress-dots"></div>
+                </div>
+                <div class="lesson-counter" id="lesson-counter">1/100</div>
+            </header>
+            
+            <main class="learn-content">
+                <div class="flashcard-wrapper">
+                    <div class="flashcard-container" onclick="flipCard()">
+                        <div class="flashcard" id="flashcard">
+                            <div class="card-face card-front">
+                                <div class="card-badge" id="front-lang-label">Afaan Ingilizii</div>
+                                <div class="word-display" id="word-primary">Hello</div>
+                                <div class="tap-hint">
+                                    <i class="fas fa-hand-pointer"></i>
+                                    <span>Tuqi hiika argachuuf</span>
+                                </div>
+                            </div>
+                            <div class="card-face card-back">
+                                <div class="card-badge" id="back-lang-label">Afaan Oromo</div>
+                                <div class="word-display" id="word-secondary">Nagaa</div>
+                                <div class="example-container">
+                                    <div class="example-label">
+                                        <i class="fas fa-quote-left"></i> Fakkeenya 1
+                                    </div>
+                                    <p class="example-text" id="word-example-1">"Hello, how are you?"</p>
+                                    <p class="example-translation" id="word-example-om-1">→ "Nagaa, akkam jirta?"</p>
+                                </div>
+                                <p class="explanation" id="word-explanation">Jecha nagaa gaafachuuf fayyadamnu.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card-controls">
+                    <button class="control-btn secondary" onclick="previousCard()">
+                        <i class="fas fa-chevron-left"></i> Duraa
+                    </button>
+                    <button class="control-btn primary" id="next-btn" onclick="nextCard()">
+                        Itti Aanu <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </main>
+        </div>
+
+        <!-- ================= ACTIVITY SELECT SCREEN ================= -->
+        <div id="activity-screen" class="screen">
+            <div class="activity-bg-pattern"></div>
+            
+            <header class="modern-header">
+                <button class="back-btn" onclick="showScreen('home-screen')">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h2 style="color:white;font-size:18px">Taphataa Filadhu</h2>
+                <div></div>
+            </header>
+            
+            <main class="activity-content">
+                <div class="activity-intro">
+                    <div class="activity-icon">🎮</div>
+                    <h2>Barnoota Xumurteerta!</h2>
+                    <p>Amma taphataa filadhu</p>
+                </div>
+                
+                <div class="activity-cards">
+                    <div class="activity-card" onclick="startActivity('matching')">
+                        <div class="activity-card-icon">🔗</div>
+                        <h3>Walsimsiisuu</h3>
+                        <p>Jecha fi hiika walsimsiisi</p>
+                        <div class="activity-difficulty">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-card" onclick="startActivity('fillblank')">
+                        <div class="activity-card-icon">📝</div>
+                        <h3>Duwwaa Guutuu</h3>
+                        <p>Jecha dhokate argi</p>
+                        <div class="activity-difficulty">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-card" onclick="startActivity('listening')">
+                        <div class="activity-card-icon">🎧</div>
+                        <h3>Dhageeffachuu</h3>
+                        <p>Sagalee dhageeffadhuun barreessi</p>
+                        <div class="activity-difficulty">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-card" onclick="startQuiz()">
+                        <div class="activity-card-icon">🧠</div>
+                        <h3>Qormaata</h3>
+                        <p>Beekumsa kee qormaadhaan mirkaneessi</p>
+                        <div class="activity-difficulty">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- ================= MATCHING ACTIVITY ================= -->
+        <div id="matching-screen" class="screen">
+            <header class="modern-header">
+                <button class="back-btn" onclick="showScreen('activity-screen')">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <div class="quiz-header-info">
+                    <i class="fas fa-link"></i>
+                    <span>Walsimsiisuu</span>
+                </div>
+                <div class="quiz-score">
+                    <i class="fas fa-star"></i>
+                    <span id="matching-score">0</span>
+                </div>
+            </header>
+            
+            <main class="matching-content">
+                <div class="matching-instruction">
+                    <i class="fas fa-info-circle"></i>
+                    <span>Afaan Ingilizii fi Afaan Oromo walsimsiisi</span>
+                </div>
+                
+                <div class="matching-columns">
+                    <div class="matching-column" id="matching-english"></div>
+                    <div class="matching-column" id="matching-oromo"></div>
+                </div>
+            </main>
+        </div>
+
+        <!-- ================= FILL BLANK ACTIVITY ================= -->
+        <div id="fillblank-screen" class="screen">
+            <header class="modern-header">
+                <button class="back-btn" onclick="showScreen('activity-screen')">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <div class="quiz-header-info">
+                    <i class="fas fa-pen"></i>
+                    <span>Duwwaa Guutuu</span>
+                </div>
+                <div class="quiz-score">
+                    <i class="fas fa-star"></i>
+                    <span id="fillblank-score">0</span>
+                </div>
+            </header>
+            
+            <main class="fillblank-content">
+                <div class="fillblank-question">
+                    <p class="fillblank-label">Jecha dhokate barreessi:</p>
+                    <div class="fillblank-sentence" id="fillblank-sentence">
+                        Hello, how ____ you?
+                    </div>
+                    <div class="fillblank-hint" id="fillblank-hint">
+                        Hiika: Nagaa, akkam jirta?
+                    </div>
+                </div>
+                
+                <div class="fillblank-input-group">
+                    <input type="text" id="fillblank-input" class="fillblank-input" placeholder="Asitti barreessi...">
+                    <button class="fillblank-submit" onclick="checkFillBlank()">
+                        <i class="fas fa-check"></i>
+                    </button>
+                </div>
+                
+                <button id="fillblank-next" class="quiz-next-btn hidden" onclick="nextFillBlank()">
+                    Gaaffii Itti Aanu <i class="fas fa-arrow-right"></i>
+                </button>
+            </main>
+        </div>
+
+        <!-- ================= QUIZ SCREEN ================= -->
+        <div id="quiz-screen" class="screen">
+            <div class="quiz-bg-pattern"></div>
+            
+            <header class="modern-header">
+                <div class="quiz-header-info">
+                    <i class="fas fa-brain"></i>
+                    <span>Qormaata</span>
+                </div>
+                <div class="quiz-score">
+                    <i class="fas fa-star"></i>
+                    <span id="quiz-current-score">0</span>
+                </div>
+            </header>
+            
+            <main class="quiz-content">
+                <div class="quiz-progress-bar">
+                    <div class="quiz-progress-fill" id="quiz-progress"></div>
+                </div>
+                
+                <div class="quiz-question-card">
+                    <div class="question-label">
+                        <i class="fas fa-question-circle"></i>
+                        Jechi kun Afaan Oromootti maal jechuu dha?
+                    </div>
+                    <div class="question-word" id="quiz-word">Hello</div>
+                </div>
+                
+                <div class="quiz-options" id="quiz-options"></div>
+                
+                <button id="quiz-next-btn" class="quiz-next-btn hidden" onclick="nextQuestion()">
+                    Gaaffii Itti Aanu <i class="fas fa-arrow-right"></i>
+                </button>
+            </main>
+        </div>
+
+        <!-- ================= RESULT SCREEN ================= -->
+        <div id="result-screen" class="screen">
+            <div class="result-bg-pattern"></div>
+            <div class="result-wrapper">
+                <div class="confetti-container" id="confetti"></div>
+                
+                <div class="result-card">
+                    <div class="result-emoji" id="result-emoji">🏆</div>
+                    <h2 class="result-title" id="result-title">Baga Gammaddan!</h2>
+                    
+                    <div class="score-display">
+                        <div class="score-circle" id="score-circle">
+                            <div class="score-percentage" id="score-percentage">100%</div>
+                            <div class="score-detail" id="score-detail">3/3 sirrii</div>
+                        </div>
+                    </div>
+                    
+                    <div class="stars-rating" id="stars-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    
+                    <p class="result-message" id="result-message">Hojii ajaa'ibaa!</p>
+                    
+                    <div class="xp-gained">
+                        <i class="fas fa-star"></i>
+                        <span>+<span id="xp-gained">50</span> XP</span>
+                    </div>
+                    
+                    <div class="result-buttons">
+                        <button id="retry-btn" class="result-btn secondary hidden" onclick="retryLesson()">
+                            <i class="fas fa-redo"></i> Irra Deebi'i
+                        </button>
+                        <button id="next-lesson-btn" class="result-btn primary hidden" onclick="goToNextLesson()">
+                            Barnoota Itti Aanu <i class="fas fa-arrow-right"></i>
+                        </button>
+                        <button class="result-btn home" onclick="showScreen('home-screen')">
+                            <i class="fas fa-home"></i> Gara Mana
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= USER MENU MODAL ================= -->
+        <div id="user-menu-modal" class="modal hidden">
+            <div class="modal-overlay" onclick="closeUserMenu()"></div>
+            <div class="modal-content user-menu-content">
+                <div class="user-menu-header">
+                    <div class="user-menu-avatar" id="menu-user-avatar">👤</div>
+                    <h3 id="menu-user-name">User</h3>
+                    <p id="menu-user-phone">09XXXXXXXX</p>
+                </div>
+                
+                <div class="user-menu-stats">
+                    <div class="stat-item">
+                        <i class="fas fa-star"></i>
+                        <span id="menu-xp">0 XP</span>
+                    </div>
+                    <div class="stat-item">
+                        <i class="fas fa-book"></i>
+                        <span id="menu-lessons">0 Barnoota</span>
+                    </div>
+                </div>
+                
+                <div class="user-menu-actions">
+                    <button class="menu-action-btn" onclick="showProfile()">
+                        <i class="fas fa-user"></i>
+                        <span>Piroofiila</span>
+                    </button>
+                    <button class="menu-action-btn" onclick="showAchievements()">
+                        <i class="fas fa-trophy"></i>
+                        <span>Milkii</span>
+                    </button>
+                    <button class="menu-action-btn danger" onclick="logoutUser()">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Ba'i (Logout)</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= REGISTRATION MODAL ================= -->
+        <div id="register-modal" class="modal hidden">
+            <div class="modal-overlay" onclick="closeRegisterModal()"></div>
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeRegisterModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+                
+                <div class="modal-header">
+                    <div class="premium-icon">👤</div>
+                    <h2>Galmeessi</h2>
+                    <p>Barnoota Premium barachuuf of galmeessi</p>
+                </div>
+                
+                <div class="register-form">
+                    <div class="form-group">
+                        <label><i class="fas fa-user"></i> Maqaa Guutuu</label>
+                        <input type="text" id="reg-name" class="form-input" placeholder="Fkn: Abdisa Tolasaa" maxlength="50">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-phone"></i> Lakkoofsa Bilbilaa</label>
+                        <input type="tel" id="reg-phone" class="form-input" placeholder="09XXXXXXXX" maxlength="10">
+                    </div>
+                    
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="reg-terms">
+                            <span>Haala tajaajilaa fi imertii dhuunfaa nan fudhadha</span>
+                        </label>
+                    </div>
+                    
+                    <div class="form-info">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Maqaa fi lakkoofsa sirrii galchi. Koodiin kee Telegram @jabaa irratti siif ergama.</span>
+                    </div>
+                    
+                    <button class="paid-btn" onclick="registerUser()">
+                        <i class="fas fa-user-plus"></i> Galmeessi
+                    </button>
+                    
+                    <div class="divider"><span>ykn</span></div>
+                    
+                    <button class="secondary-btn" onclick="showLoginModal()">
+                        <i class="fas fa-sign-in-alt"></i> Duraan Galmaa'een Ture
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= LOGIN MODAL ================= -->
+        <div id="login-modal" class="modal hidden">
+            <div class="modal-overlay" onclick="closeLoginModal()"></div>
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeLoginModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+                
+                <div class="modal-header">
+                    <div class="premium-icon">🔑</div>
+                    <h2>Seeni</h2>
+                    <p>Lakkoofsa bilbilaa keetiin seeni</p>
+                </div>
+                
+                <div class="register-form">
+                    <div class="form-group">
+                        <label><i class="fas fa-phone"></i> Lakkoofsa Bilbilaa</label>
+                        <input type="tel" id="login-phone" class="form-input" placeholder="09XXXXXXXX" maxlength="10">
+                    </div>
+                    
+                    <button class="paid-btn" onclick="loginUser()">
+                        <i class="fas fa-sign-in-alt"></i> Seeni
+                    </button>
+                    
+                    <p class="support-text" style="margin-top:15px">
+                        Hin galmoofne? <a href="#" onclick="showRegisterModal(); return false;">Amma galmeessi</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= PREMIUM MODAL ================= -->
+        <div id="premium-modal" class="modal hidden">
+            <div class="modal-overlay" onclick="closePremiumModal()"></div>
+            <div class="modal-content">
+                <button class="modal-close" onclick="closePremiumModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+                
+                <div class="user-info-header" id="user-info-header">
+                    <div class="user-avatar-small">👤</div>
+                    <div class="user-details">
+                        <h3 id="current-user-name">User</h3>
+                        <p id="current-user-phone">09XXXXXXXX</p>
+                    </div>
+                    <button class="logout-btn" onclick="logoutUser()" title="Ba'i">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+                
+                <div class="modal-header">
+                    <div class="premium-icon">💎</div>
+                    <h2>Barnoota Premium</h2>
+                    <p id="premium-status-text">Koodii banumsaa galchi</p>
+                </div>
+                
+                <div id="lock-warning" class="lock-warning hidden">
+                    <div class="lock-icon">🔒</div>
+                    <h3>Herregni Kee Cufameera!</h3>
+                    <p id="lock-message">Yeroo sadii ol koodii dogoggoraa galchteef herregni kee sa'aatii 24f cufameera.</p>
+                    <p class="lock-time" id="lock-countdown">00:00:00</p>
+                    <a href="https://t.me/jabaa" target="_blank" class="telegram-btn small">
+                        <i class="fab fa-telegram"></i> Admin Qunnamaa
+                    </a>
+                </div>
+                
+                <div id="already-activated" class="already-activated hidden">
+                    <div class="success-icon">✅</div>
+                    <h3>Premium Siif Banameera!</h3>
+                    <p>Barnoota hunda barachuu dandeessa.</p>
+                    <button class="paid-btn" onclick="closePremiumModal()">
+                        <i class="fas fa-book-open"></i> Barnoota Jalqabi
+                    </button>
+                </div>
+                
+                <div id="waiting-for-code" class="waiting-section hidden">
+                    <div class="waiting-icon">⏳</div>
+                    <h3>Koodii Eegaa Jirra...</h3>
+                    <p>Admin koodii banumsaa Telegram irratti siif erga.</p>
+                    
+                    <a href="https://t.me/jabaa" target="_blank" class="telegram-btn">
+                        <i class="fab fa-telegram"></i> @jabaa Irratti Koodii Gaafadhu
+                    </a>
+                    
+                    <div class="payment-instructions">
+                        <h4><i class="fas fa-info-circle"></i> Tartiiba Kaffaltii</h4>
+                        <ol>
+                            <li><strong>150 ETB</strong> gara Telebirr/Awash Bank ergi</li>
+                            <li><strong>Screenshot</strong> ragaa kaffaltii qabadhu</li>
+                            <li>Telegram <strong>@jabaa</strong> irratti screenshot fi lakkoofsa bilbilaa kee ergi</li>
+                            <li>Admin koodii dhuunfaa siif erga</li>
+                            <li>Koodii san asitti galchi</li>
+                        </ol>
+                    </div>
+                    
+                    <div class="payment-tabs">
+                        <button class="payment-tab active" onclick="switchPaymentTab('telebirr')">📱 Telebirr</button>
+                        <button class="payment-tab" onclick="switchPaymentTab('awash')">🏦 Awash Bank</button>
+                    </div>
+                    
+                    <div class="payment-details" id="payment-details"></div>
+                </div>
+                
+                <div id="activation-form-section" class="activation-section">
+                    <h4><i class="fas fa-key"></i> Koodii Banumsaa Galchi</h4>
+                    <div class="code-input-group">
+                        <input type="text" id="activation-code-input" class="code-input" placeholder="BARADHU-XXXX-XXXX" maxlength="20">
+                        <button class="activate-btn" onclick="verifyActivationCode()">
+                            <i class="fas fa-unlock"></i> Bani
+                        </button>
+                    </div>
+                    
+                    <div class="attempts-info" id="attempts-info">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span id="attempts-text">Yaalii hafe: <strong>3</strong></span>
+                    </div>
+                    
+                    <p class="code-hint">Koodii admin irraa argatte as galchi</p>
+                </div>
+                
+                <div id="activation-error" class="activation-error hidden">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span id="error-message">Kodiin sirrii miti!</span>
+                </div>
+                
+                <p class="support-text">
+                    Rakkoo qabdaa? <a href="https://t.me/jabaa" target="_blank">@jabaa</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- ================= ADMIN PANEL ================= -->
+        <div id="admin-panel" class="modal hidden">
+            <div class="modal-overlay" onclick="closeAdminPanel()"></div>
+            <div class="modal-content admin-modal">
+                <button class="modal-close" onclick="closeAdminPanel()">
+                    <i class="fas fa-times"></i>
+                </button>
+                
+                <div class="modal-header">
+                    <div class="premium-icon">🔐</div>
+                    <h2>Admin Dashboard</h2>
+                    <p>Fayyadamtoota hunda to'adhu</p>
+                </div>
+                
+                <div class="admin-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-value" id="stat-total-users">0</div>
+                        <div class="stat-label">Hundaa</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">✅</div>
+                        <div class="stat-value" id="stat-activated">0</div>
+                        <div class="stat-label">Baname</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⏳</div>
+                        <div class="stat-value" id="stat-waiting">0</div>
+                        <div class="stat-label">Eegaa</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🔒</div>
+                        <div class="stat-value" id="stat-locked">0</div>
+                        <div class="stat-label">Cufame</div>
+                    </div>
+                </div>
+                
+                <div class="admin-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="admin-search-input" class="admin-search-input" placeholder="Maqaa ykn lakkoofsa barbaadi..." oninput="renderUsersList()">
+                </div>
+                
+                <div class="admin-controls">
+                    <div class="admin-filter">
+                        <button class="filter-btn active" onclick="filterUsers('all', this)">Hundaa</button>
+                        <button class="filter-btn" onclick="filterUsers('waiting', this)">Eegaa</button>
+                        <button class="filter-btn" onclick="filterUsers('activated', this)">Baname</button>
+                        <button class="filter-btn" onclick="filterUsers('locked', this)">Cufame</button>
+                    </div>
+                    <select class="admin-sort" onchange="sortUsers(this.value)">
+                        <option value="newest">Haaraa → Duri</option>
+                        <option value="oldest">Duri → Haaraa</option>
+                        <option value="name">Maqaa A-Z</option>
+                    </select>
+                </div>
+                
+                <div class="admin-section">
+                    <h4><i class="fas fa-users"></i> Fayyadamtoota</h4>
+                    <div id="users-list" class="users-list"></div>
+                </div>
+                
+                <div class="admin-section">
+                    <h4><i class="fas fa-cog"></i> Hojii Admin</h4>
+                    <button class="generate-code-btn" onclick="generateCodeForSelected()">
+                        <i class="fas fa-magic"></i> Fayyadamaa Filatameef Koodii Uumi
+                    </button>
+                    <div class="admin-buttons-row">
+                        <button class="export-btn" onclick="exportUsersData()">
+                            <i class="fas fa-download"></i> Export
+                        </button>
+                        <button class="reset-btn" onclick="resetAllData()">
+                            <i class="fas fa-trash"></i> Daataa Haqi
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= USER DETAIL MODAL ================= -->
+        <div id="user-detail-modal" class="modal hidden">
+            <div class="modal-overlay" onclick="closeUserDetail()"></div>
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeUserDetail()">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div id="user-detail-content"></div>
+            </div>
+        </div>
+
+        <!-- ================= CONFIRM MODAL ================= -->
+        <div id="confirm-modal" class="modal hidden">
+            <div class="modal-overlay"></div>
+            <div class="modal-content confirm-content">
+                <div class="confirm-icon" id="confirm-icon">⚠️</div>
+                <h3 id="confirm-title">Mirkaneessi</h3>
+                <p id="confirm-message">Kana gochuu barbaadda?</p>
+                <div class="confirm-buttons">
+                    <button class="confirm-cancel" onclick="closeConfirmModal()">Haquu</button>
+                    <button class="confirm-ok" id="confirm-ok-btn">Eeyyee</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+   <!-- CRITICAL: Load lessons BEFORE loader.js -->
+    <script src="data/lesson1.js"></script>
+    <script src="data/lesson2.js"></script>
+    <script src="data/lesson3.js"></script>
+    <script src="data/lesson4.js"></script>
+    <script src="data/lesson5.js"></script>
+    <script src="data/lesson6.js"></script>
+    <script src="data/lesson7.js"></script>
+    <script src="data/lesson8.js"></script>
+    <script src="data/lesson9.js"></script>
+    <script src="data/lesson10.js"></script>
+    <script src="data/lesson11.js"></script>
+    <script src="data/lesson12.js"></script>
+    <script src="data/lesson13.js"></script>
+    
+    <!-- Load loader AFTER all lessons -->
+    <script src="data/loader.js"></script>
+    
+    <!-- Load app.js LAST -->
+    <script src="app.js"></script>
+</body>
+</html>
